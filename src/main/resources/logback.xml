@@ -1,15 +1,22 @@
 <configuration>
 
     <!-- Конфигурация для логирования в файл -->
-    <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>logs/hippodrome.log</file>
+    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/hippodrome.log</file> <!-- Основной лог-файл -->
+        <!-- Политика ротации файлов -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/hippodrome.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory> <!-- Хранить логи за 7 дней -->
+        </rollingPolicy>
+        <!-- Форматирование сообщений в логе -->
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss},%d{SSS} %-5level %logger{36}: %msg%n</pattern>
         </encoder>
     </appender>
+
     <!-- Определение корневого логера -->
     <root level="all">
-        <appender-ref ref="file"/>
+        <appender-ref ref="rollingFile"/>
     </root>
 
 </configuration>
