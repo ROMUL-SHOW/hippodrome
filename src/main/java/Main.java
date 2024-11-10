@@ -16,8 +16,9 @@ public class Main {
                 new Horse("Pegasus", 2.9),
                 new Horse("Cherry", 3)
         );
-        logger.info("Начало скачек. Количество участников: " + horses.size());
+
         Hippodrome hippodrome = new Hippodrome(horses);
+        logger.info("Начало скачек. Количество участников: " + horses.size());
         for (int i = 0; i < 100; i++) {
             hippodrome.move();
             watch(hippodrome);
