@@ -1,5 +1,7 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
@@ -26,6 +28,23 @@ public class HorseTest {
             new Horse(name, 2.9);
         });
         assertEquals("Name cannot be blank.", throwable.getMessage());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "Black, 2.23, 2331.322",
+            "White, 14.95, 423.12",
+            "Red, 62.45, 1242.23",
+            "Blue, 83.15, 3543.12"
+    })
+    public void ConstructorHorse(String name, double speed, double distance) throws Exception {
+        String expectedName = name;
+        double expectedSpeed = speed;
+        double expectedDistance = distance;
+        Horse horse = new Horse(name, speed, distance);
+        Assertions.assertEquals(expectedName, horse.getName());
+        Assertions.assertEquals(expectedSpeed, horse.getSpeed());
+        Assertions.assertEquals(expectedDistance, horse.getDistance());
     }
 
     @Test
